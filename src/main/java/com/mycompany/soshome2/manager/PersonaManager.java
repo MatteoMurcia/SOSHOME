@@ -24,10 +24,6 @@ public class PersonaManager {
         Persona p=pd.getPersona(cedula);
         return p;
     }
-    public static Persona pedirPersona(String cedula,String contrasena){
-        PersonaDAO pd = new PersonaDAO();
-        Persona p=pd.getPersona(cedula,contrasena);
-        return p;
-    }
+    
 
 }

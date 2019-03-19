@@ -66,11 +66,18 @@ public class LoginServlet extends HttpServlet {
         login l= new login ();
         l = (login) Utils.fromJson(Utils.readParams(request), login.class );
         Persona p= new Persona();
-        System.out.println(p.toString());
-        p= PersonaManager.pedirPersona("2347850910");
+        
+        p= PersonaManager.pedirPersona(l.getCedula());
+       
+        if(l.getClave().equals(p.getClave())){
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(Utils.toJson(p));
+        response.getWriter().write(Utils.toJson("correcto"));
+        }else{
+            response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(Utils.toJson("incorrecto"));
+        }
     }
 
     /**

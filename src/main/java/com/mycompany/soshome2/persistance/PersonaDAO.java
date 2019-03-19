@@ -47,8 +47,8 @@ public class PersonaDAO {
         try{
             em =Factory.get().createEntityManager();
             em.getTransaction().begin();
-            TypedQuery<Persona> query = (TypedQuery<Persona>) em.createQuery("SELECT e FROM Persona e ",Persona.class);
-            //query.setParameter("myParameter", cedula);
+            TypedQuery<Persona> query = (TypedQuery<Persona>) em.createQuery("SELECT e FROM Persona e WHERE e.cedula=:myParameter",Persona.class);
+            query.setParameter("myParameter", cedula);
             em.getTransaction().commit();
             return (Persona) query.getResultList().get(0);
         }catch(Exception e){
@@ -62,22 +62,6 @@ public class PersonaDAO {
         }
     }
     
-    public Persona getPersona(String cedula, String clave){
-        try{
-            em =Factory.get().createEntityManager();
-            em.getTransaction().begin();
-            TypedQuery<Persona> query = (TypedQuery<Persona>) em.createQuery("SELECT p FROM Persona p WHERE p.cedula = '"+cedula+"' AND p.clave = '"+clave+"'",Persona.class);
-            em.getTransaction().commit();
-            return (Persona) query.getResultList();
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            return new Persona();
-        }finally{
-            if(em!=null && em.isOpen()){
-                em.close();
-            }
-        }
-    }
+    
 
 }
