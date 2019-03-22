@@ -12,6 +12,10 @@
         <servlet-name>RegistroCServlet</servlet-name>
         <servlet-class>com.mycompany.soshome2.servlets.RegistroCServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegistroPServlet</servlet-name>
+        <servlet-class>com.mycompany.soshome2.servlets.RegistroPServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>RegistroCServlet</servlet-name>
         <url-pattern>/RegistroCServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistroPServlet</servlet-name>
+        <url-pattern>/RegistroPServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

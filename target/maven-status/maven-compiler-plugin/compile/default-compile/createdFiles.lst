@@ -14,6 +14,7 @@ com\mycompany\soshome2\Cliente.class
 com\mycompany\soshome2\Proveedor_.class
 com\mycompany\soshome2\persistance\ProveedorDAO.class
 com\mycompany\soshome2\Proveedor.class
+com\mycompany\soshome2\servlets\RegistroPServlet.class
 com\mycompany\soshome2\utils\login.class
 com\mycompany\soshome2\persistance\ClienteDAO.class
 com\mycompany\soshome2\Cliente_.class
