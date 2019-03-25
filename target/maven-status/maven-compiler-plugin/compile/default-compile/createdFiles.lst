@@ -22,4 +22,3 @@ com\mycompany\soshome2\Cliente.class
 com\mycompany\soshome2\Proveedor_.class
 com\mycompany\soshome2\persistance\ClienteDAO.class
 com\mycompany\soshome2\Cliente_.class
-jwtutils.class

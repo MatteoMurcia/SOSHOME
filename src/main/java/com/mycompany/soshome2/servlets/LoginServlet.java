@@ -12,9 +12,13 @@ import com.mycompany.soshome2.manager.ClienteManager;
 import com.mycompany.soshome2.manager.ProveedorManager;
 import com.mycompany.soshome2.utils.Utils;
 import com.mycompany.soshome2.utils.login;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -69,14 +73,41 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             if(p.getClave()!=null && p.getClave().equals(l.getClave())){
+                String KEY = "token";
+                long tiempo = System.currentTimeMillis();
+                String jwt =Jwts.builder()
+                        .signWith(SignatureAlgorithm.HS256, KEY)
+                        .setSubject("token")
+                        .setIssuedAt(new Date(tiempo))
+                        .setExpiration(new Date(tiempo+90000))
+                        .claim("nombre", p.getNombre())
+                        .claim("apellido", p.getApellido())
+                        .claim("cedula", p.getCedulap())
+                        .compact();
+                Cookie token = new Cookie("token",jwt);
+                response.addCookie(token);
                 response.getWriter().write(Utils.toJson("proveedor"));
             }
             else if(cli.getClave()!=null && cli.getClave().equals(l.getClave())){
                 response.getWriter().write(Utils.toJson("cliente"));
+                String KEY = "token";
+                long tiempo = System.currentTimeMillis();
+                String jwt =Jwts.builder()
+                        .signWith(SignatureAlgorithm.HS256, KEY)
+                        .setSubject("token")
+                        .setIssuedAt(new Date(tiempo))
+                        .setExpiration(new Date(tiempo+90000))
+                        .claim("nombre", cli.getNombre())
+                        .claim("apellido", cli.getApellido())
+                        .claim("cedula", cli.getCedulac())
+                        .compact();
+                Cookie token = new Cookie("token",jwt);
+                response.addCookie(token);
             }
             else{
                 response.getWriter().write(Utils.toJson("error"));
-            }   
+            }
+        
     }
 
     /**
