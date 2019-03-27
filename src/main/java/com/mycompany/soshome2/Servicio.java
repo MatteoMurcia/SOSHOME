@@ -59,7 +59,7 @@ public class Servicio implements Serializable {
     
     @JoinColumn(name = "cedulac", referencedColumnName = "cedulac")
     @ManyToOne
-    private Cliente cedulac;
+    private String cedulac;
     
 
     public Servicio() {
@@ -103,11 +103,11 @@ public class Servicio implements Serializable {
 
     
 
-    public Cliente getCedulac() {
+    public String getCedulac() {
         return cedulac;
     }
 
-    public void setCedulac(Cliente cedulac) {
+    public void setCedulac(String cedulac) {
         this.cedulac = cedulac;
     }
 
