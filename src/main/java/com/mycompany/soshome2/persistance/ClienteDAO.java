@@ -7,6 +7,7 @@ package com.mycompany.soshome2.persistance;
 
 import com.mycompany.soshome2.Cliente;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -30,6 +31,25 @@ public class ClienteDAO {
         }
         finally{
             if(em != null && em.isOpen()){
+                em.close();
+            }
+        }
+    }
+    
+    public Cliente getCliente(String cedulac){
+        try{
+            em =Factory.get().createEntityManager();
+            em.getTransaction().begin();
+            TypedQuery<Cliente> query = (TypedQuery<Cliente>) em.createQuery("SELECT e FROM Cliente e WHERE e.cedulac=:myParameter",Cliente.class);
+            query.setParameter("myParameter", cedulac);
+            em.getTransaction().commit();
+            return (Cliente) query.getResultList().get(0);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return new Cliente();
+        }finally{
+            if(em!=null && em.isOpen()){
                 em.close();
             }
         }

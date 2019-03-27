@@ -24,23 +24,37 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author manga
  */
 @Entity
-
+@Table(name = "materiales")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Materiales.findAll", query = "SELECT m FROM Materiales m")
+    , @NamedQuery(name = "Materiales.findByIdmaterial", query = "SELECT m FROM Materiales m WHERE m.idmaterial = :idmaterial")
+    , @NamedQuery(name = "Materiales.findByMaterial", query = "SELECT m FROM Materiales m WHERE m.material = :material")
+    , @NamedQuery(name = "Materiales.findByCantidad", query = "SELECT m FROM Materiales m WHERE m.cantidad = :cantidad")
+    , @NamedQuery(name = "Materiales.findByValor", query = "SELECT m FROM Materiales m WHERE m.valor = :valor")})
 public class Materiales implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "idmaterial")
     private String idmaterial;
-    
+    @Size(max = 255)
     @Column(name = "material")
     private String material;
-    
+    @Size(max = 255)
     @Column(name = "cantidad")
     private String cantidad;
     @Column(name = "valor")
     private Integer valor;
-    
+    @JoinColumn(name = "cedulac", referencedColumnName = "cedulac")
+    @ManyToOne
+    private Cliente cedulac;
+    @JoinColumn(name = "idcoti", referencedColumnName = "idcoti")
+    @ManyToOne
+    private Cotizacion idcoti;
 
     public Materiales() {
     }
@@ -81,7 +95,22 @@ public class Materiales implements Serializable {
         this.valor = valor;
     }
 
-    
+    public Cliente getCedulac() {
+        return cedulac;
+    }
+
+    public void setCedulac(Cliente cedulac) {
+        this.cedulac = cedulac;
+    }
+
+    public Cotizacion getIdcoti() {
+        return idcoti;
+    }
+
+    public void setIdcoti(Cotizacion idcoti) {
+        this.idcoti = idcoti;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

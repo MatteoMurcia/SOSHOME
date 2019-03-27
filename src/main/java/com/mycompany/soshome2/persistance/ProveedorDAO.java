@@ -5,7 +5,8 @@
  */
 package com.mycompany.soshome2.persistance;
 
-import com.mycompany.soshome2.Persona;
+
+import com.mycompany.soshome2.Proveedor;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -19,11 +20,11 @@ import javax.persistence.TypedQuery;
  * @author manga
  */
 
-public class PersonaDAO {
+public class ProveedorDAO {
     
     public EntityManager em=null;
     
-    public boolean insertObject(Persona p){
+    public boolean insertObject(Proveedor p){
         try{
             em = Factory.get().createEntityManager();
             em.getTransaction().begin();
@@ -43,18 +44,18 @@ public class PersonaDAO {
         }
     }
    
-    public Persona getPersona(String cedula){
+    public Proveedor getProveedor(String cedulap){
         try{
             em =Factory.get().createEntityManager();
             em.getTransaction().begin();
-            TypedQuery<Persona> query = (TypedQuery<Persona>) em.createQuery("SELECT e FROM Persona e ",Persona.class);
-            //query.setParameter("myParameter", cedula);
+            TypedQuery<Proveedor> query = (TypedQuery<Proveedor>) em.createQuery("SELECT p FROM Proveedor p WHERE p.cedulap = :cedulap",Proveedor.class);
+            query.setParameter("cedulap", cedulap);
             em.getTransaction().commit();
-            return (Persona) query.getResultList().get(0);
+            return (Proveedor) query.getResultList().get(0);
         }catch(Exception e){
             System.out.println(e.getMessage());
             e.printStackTrace();
-            return new Persona();
+            return new Proveedor();
         }finally{
             if(em!=null && em.isOpen()){
                 em.close();
@@ -62,22 +63,6 @@ public class PersonaDAO {
         }
     }
     
-    public Persona getPersona(String cedula, String clave){
-        try{
-            em =Factory.get().createEntityManager();
-            em.getTransaction().begin();
-            TypedQuery<Persona> query = (TypedQuery<Persona>) em.createQuery("SELECT p FROM Persona p WHERE p.cedula = '"+cedula+"' AND p.clave = '"+clave+"'",Persona.class);
-            em.getTransaction().commit();
-            return (Persona) query.getResultList();
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            return new Persona();
-        }finally{
-            if(em!=null && em.isOpen()){
-                em.close();
-            }
-        }
-    }
+    
 
 }
