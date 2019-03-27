@@ -5,6 +5,9 @@
  */
 package com.mycompany.soshome2.servlets;
 
+import com.mycompany.soshome2.Cliente;
+import com.mycompany.soshome2.Persona;
+import com.mycompany.soshome2.utils.Utils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -55,6 +58,7 @@ public class RegistrerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Persona P = (Persona) Utils.fromJson(Utils.readParams(request), Persona.class);
         
     }
 
