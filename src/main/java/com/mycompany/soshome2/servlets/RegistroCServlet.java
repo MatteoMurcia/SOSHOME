@@ -6,14 +6,11 @@
 package com.mycompany.soshome2.servlets;
 
 import com.mycompany.soshome2.Cliente;
-<<<<<<< HEAD:src/main/java/com/mycompany/soshome2/servlets/RegistrerServlet.java
-import com.mycompany.soshome2.Persona;
-import com.mycompany.soshome2.utils.Utils;
-=======
+
 import com.mycompany.soshome2.manager.ClienteManager;
 import com.mycompany.soshome2.utils.Utils;
 import com.mycompany.soshome2.utils.login;
->>>>>>> 01acd00d0f68dc74ef7a03200cc6f0f77e9e9297:src/main/java/com/mycompany/soshome2/servlets/RegistroCServlet.java
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -64,11 +61,9 @@ public class RegistroCServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD:src/main/java/com/mycompany/soshome2/servlets/RegistrerServlet.java
-        Persona P = (Persona) Utils.fromJson(Utils.readParams(request), Persona.class);
-=======
+
         Cliente cli = (Cliente) Utils.fromJson(Utils.readParams(request), Cliente.class );
->>>>>>> 01acd00d0f68dc74ef7a03200cc6f0f77e9e9297:src/main/java/com/mycompany/soshome2/servlets/RegistroCServlet.java
+
         
         Cliente prueba = ClienteManager.pedirCliente(cli.getCedulac());
         response.setContentType("application/json");

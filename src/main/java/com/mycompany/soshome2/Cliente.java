@@ -60,7 +60,7 @@ public class Cliente implements Serializable {
     public Cliente() {
     }
     public Cliente (String cedula,String direccion){
-        this.setCedula(cedula);
+        this.setCedulac(cedula);
         this.setDireccion(direccion);
     }
 
