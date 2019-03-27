@@ -44,7 +44,14 @@ public class Cotizacion implements Serializable {
     
     @Column(name = "comentario")
     private String comentario;
-    
+    @JoinColumn(name = "idservice", referencedColumnName = "idservice")
+    @ManyToOne
+    private Servicio idservice;
+    @JoinColumn(name = "cedulap", referencedColumnName = "cedulap")
+    @ManyToOne
+    private Proveedor cedulap;
+    @OneToMany(mappedBy = "idcoti")
+    private Collection<Materiales> materialesCollection;
 
     public Cotizacion() {
     }
@@ -85,7 +92,30 @@ public class Cotizacion implements Serializable {
         this.comentario = comentario;
     }
 
-    
+    public Servicio getIdservice() {
+        return idservice;
+    }
+
+    public void setIdservice(Servicio idservice) {
+        this.idservice = idservice;
+    }
+
+    public Proveedor getCedulap() {
+        return cedulap;
+    }
+
+    public void setCedulap(Proveedor cedulap) {
+        this.cedulap = cedulap;
+    }
+
+    @XmlTransient
+    public Collection<Materiales> getMaterialesCollection() {
+        return materialesCollection;
+    }
+
+    public void setMaterialesCollection(Collection<Materiales> materialesCollection) {
+        this.materialesCollection = materialesCollection;
+    }
 
     @Override
     public int hashCode() {

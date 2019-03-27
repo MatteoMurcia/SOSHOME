@@ -11,11 +11,9 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -28,20 +26,36 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "cliente")
-
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+    @Column(name = "cedulac")
+    private String cedulac;
     
-   
-    @Column(name = "cedula")
-    private String cedula;
+    @Column(name = "nombre")
+    private String nombre;
+    
+    @Column(name = "apellido")
+    private String apellido;
+    
+    @Column(name = "clave")
+    private String clave;
+    
+    @Column(name = "genero")
+    private String genero;
+    
+    @Column(name = "telefono")
+    private String telefono;
+    @Column(name = "calificacion")
+    private Integer calificacion;
+    
+    @Column(name = "correo")
+    private String correo;
     
     @Column(name = "direccion")
     private String direccion;
-    
+   
 
     public Cliente() {
     }
@@ -50,16 +64,72 @@ public class Cliente implements Serializable {
         this.setDireccion(direccion);
     }
 
-    public Cliente(String cedula) {
-        this.cedula = cedula;
+    public Cliente(String cedulac) {
+        this.cedulac = cedulac;
     }
 
-    public String getCedula() {
-        return cedula;
+    public String getCedulac() {
+        return cedulac;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setCedulac(String cedulac) {
+        this.cedulac = cedulac;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public Integer getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(Integer calificacion) {
+        this.calificacion = calificacion;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getDireccion() {
@@ -71,11 +141,10 @@ public class Cliente implements Serializable {
     }
 
     
-
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (cedula != null ? cedula.hashCode() : 0);
+        hash += (cedulac != null ? cedulac.hashCode() : 0);
         return hash;
     }
 
@@ -86,7 +155,7 @@ public class Cliente implements Serializable {
             return false;
         }
         Cliente other = (Cliente) object;
-        if ((this.cedula == null && other.cedula != null) || (this.cedula != null && !this.cedula.equals(other.cedula))) {
+        if ((this.cedulac == null && other.cedulac != null) || (this.cedulac != null && !this.cedulac.equals(other.cedulac))) {
             return false;
         }
         return true;
@@ -94,7 +163,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.soshome2.Cliente[ cedula=" + cedula + " ]";
+        return "com.mycompany.soshome2.Cliente[ cedulac=" + cedulac + " ]";
     }
     
 }

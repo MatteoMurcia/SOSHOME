@@ -18,5 +18,10 @@ public class ClienteManager {
         cd.insertObject(cli);
         return "insert success";
     }
-
+    
+    public static Cliente pedirCliente(String cedula){
+        ClienteDAO pd = new ClienteDAO();
+        Cliente p=pd.getCliente(cedula);
+        return p;
+    }
 }

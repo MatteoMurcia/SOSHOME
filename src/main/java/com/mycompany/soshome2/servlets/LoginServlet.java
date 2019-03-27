@@ -5,13 +5,20 @@
  */
 package com.mycompany.soshome2.servlets;
 
-import com.mycompany.soshome2.Persona;
-import com.mycompany.soshome2.manager.PersonaManager;
+
+import com.mycompany.soshome2.Cliente;
+import com.mycompany.soshome2.Proveedor;
+import com.mycompany.soshome2.manager.ClienteManager;
+import com.mycompany.soshome2.manager.ProveedorManager;
 import com.mycompany.soshome2.utils.Utils;
 import com.mycompany.soshome2.utils.login;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,10 +52,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Persona p = PersonaManager.pedirPersona("2347850500");
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(Utils.toJson(p));
+        
         
     }
 
@@ -63,21 +67,47 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        login l= new login ();
-        l = (login) Utils.fromJson(Utils.readParams(request), login.class );
-        Persona p= new Persona();
-        
-        p= PersonaManager.pedirPersona(l.getCedula());
-       
-        if(l.getClave().equals(p.getClave())){
+        login l = (login) Utils.fromJson(Utils.readParams(request), login.class );
+        Proveedor p= ProveedorManager.pedirProveedor(l.getCedula());
+        Cliente cli = ClienteManager.pedirCliente(l.getCedula());
         response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(Utils.toJson("correcto"));
-        }else{
-            response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(Utils.toJson("incorrecto"));
-        }
+            response.setCharacterEncoding("UTF-8");
+            if(p.getClave()!=null && p.getClave().equals(l.getClave())){
+                String KEY = "token";
+                long tiempo = System.currentTimeMillis();
+                String jwt =Jwts.builder()
+                        .signWith(SignatureAlgorithm.HS256, KEY)
+                        .setSubject("token")
+                        .setIssuedAt(new Date(tiempo))
+                        .setExpiration(new Date(tiempo+90000))
+                        .claim("nombre", p.getNombre())
+                        .claim("apellido", p.getApellido())
+                        .claim("cedula", p.getCedulap())
+                        .compact();
+                Cookie token = new Cookie("token",jwt);
+                response.addCookie(token);
+                response.getWriter().write(Utils.toJson("proveedor"));
+            }
+            else if(cli.getClave()!=null && cli.getClave().equals(l.getClave())){
+                response.getWriter().write(Utils.toJson("cliente"));
+                String KEY = "token";
+                long tiempo = System.currentTimeMillis();
+                String jwt =Jwts.builder()
+                        .signWith(SignatureAlgorithm.HS256, KEY)
+                        .setSubject("token")
+                        .setIssuedAt(new Date(tiempo))
+                        .setExpiration(new Date(tiempo+90000))
+                        .claim("nombre", cli.getNombre())
+                        .claim("apellido", cli.getApellido())
+                        .claim("cedula", cli.getCedulac())
+                        .compact();
+                Cookie token = new Cookie("token",jwt);
+                response.addCookie(token);
+            }
+            else{
+                response.getWriter().write(Utils.toJson("error"));
+            }
+        
     }
 
     /**
