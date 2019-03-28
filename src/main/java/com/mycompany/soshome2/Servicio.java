@@ -31,26 +31,18 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "servicio")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Servicio.findAll", query = "SELECT s FROM Servicio s")
-    , @NamedQuery(name = "Servicio.findByNombres", query = "SELECT s FROM Servicio s WHERE s.nombres = :nombres")
-    , @NamedQuery(name = "Servicio.findByIdservice", query = "SELECT s FROM Servicio s WHERE s.idservice = :idservice")
-    , @NamedQuery(name = "Servicio.findByDescripcion", query = "SELECT s FROM Servicio s WHERE s.descripcion = :descripcion")
-    , @NamedQuery(name = "Servicio.findByFecha", query = "SELECT s FROM Servicio s WHERE s.fecha = :fecha")})
+
 public class Servicio implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Size(max = 255)
+   
     @Column(name = "nombres")
     private String nombres;
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+   
     @Column(name = "idservice")
     private String idservice;
-    @Size(max = 255)
+    
     @Column(name = "descripcion")
     private String descripcion;
     @Column(name = "fecha")

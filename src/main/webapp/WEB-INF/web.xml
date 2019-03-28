@@ -20,6 +20,14 @@
         <servlet-name>ServicioServlet</servlet-name>
         <servlet-class>com.mycompany.soshome2.servlets.ServicioServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EnviadoServlet</servlet-name>
+        <servlet-class>com.mycompany.soshome2.servlets.EnviadoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProveedoresServlet</servlet-name>
+        <servlet-class>com.mycompany.soshome2.servlets.ProveedoresServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>ServicioServlet</servlet-name>
         <url-pattern>/ServicioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EnviadoServlet</servlet-name>
+        <url-pattern>/EnviadoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProveedoresServlet</servlet-name>
+        <url-pattern>/ProveedoresServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

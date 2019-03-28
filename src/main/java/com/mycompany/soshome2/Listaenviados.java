@@ -24,24 +24,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "listaenviados")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Listaenviados.findAll", query = "SELECT l FROM Listaenviados l")
-    , @NamedQuery(name = "Listaenviados.findById", query = "SELECT l FROM Listaenviados l WHERE l.id = :id")})
 public class Listaenviados implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
-    @JoinColumn(name = "idservice", referencedColumnName = "idservice")
-    @ManyToOne
-    private Servicio idservice;
-    @JoinColumn(name = "cedulap", referencedColumnName = "cedulap")
-    @ManyToOne
-    private Proveedor cedulap;
+    
+    private String idservice;
+    
+    private String cedulap;
 
     public Listaenviados() {
     }
@@ -58,19 +50,19 @@ public class Listaenviados implements Serializable {
         this.id = id;
     }
 
-    public Servicio getIdservice() {
+    public String getIdservice() {
         return idservice;
     }
 
-    public void setIdservice(Servicio idservice) {
+    public void setIdservice(String idservice) {
         this.idservice = idservice;
     }
 
-    public Proveedor getCedulap() {
+    public String getCedulap() {
         return cedulap;
     }
 
-    public void setCedulap(Proveedor cedulap) {
+    public void setCedulap(String cedulap) {
         this.cedulap = cedulap;
     }
 
