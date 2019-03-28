@@ -1,11 +1,12 @@
 com\mycompany\soshome2\Cotizacion.class
 com\mycompany\soshome2\utils\Utils$TestExclStrat.class
+com\mycompany\soshome2\manager\ServicioManager.class
 com\mycompany\soshome2\manager\ProveedorManager.class
 com\mycompany\soshome2\persistance\ProveedorDAO.class
 com\mycompany\soshome2\Proveedor.class
 com\mycompany\soshome2\servlets\RegistroPServlet.class
+com\mycompany\soshome2\servlets\ServicioServlet.class
 com\mycompany\soshome2\utils\login.class
-com\mycompany\soshome2\jwt\jwtUtils.class
 com\mycompany\soshome2\Servicio.class
 com\mycompany\soshome2\servlets\LoginServlet.class
 com\mycompany\soshome2\utils\Utils.class
@@ -20,5 +21,10 @@ com\mycompany\soshome2\Listaenviados.class
 com\mycompany\soshome2\Materiales_.class
 com\mycompany\soshome2\Cliente.class
 com\mycompany\soshome2\Proveedor_.class
+com\mycompany\soshome2\servlets\ProveedoresServlet.class
+com\mycompany\soshome2\manager\ListaenviadosManager.class
 com\mycompany\soshome2\persistance\ClienteDAO.class
 com\mycompany\soshome2\Cliente_.class
+com\mycompany\soshome2\persistance\ServicioDAO.class
+com\mycompany\soshome2\servlets\EnviadoServlet.class
+com\mycompany\soshome2\persistance\ListaenviadosDAO.class
