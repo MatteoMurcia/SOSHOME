@@ -8,6 +8,8 @@ package com.mycompany.soshome2.manager;
 import com.mycompany.soshome2.Cliente;
 import com.mycompany.soshome2.Proveedor;
 import com.mycompany.soshome2.persistance.ProveedorDAO;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -25,6 +27,10 @@ public class ProveedorManager {
         Proveedor p=pd.getProveedor(cedulap);
         return p;
     }
-    
+    public static List<Proveedor> pedirListaProveedor(String profesion){
+        ProveedorDAO pd = new ProveedorDAO();
+        List<Proveedor> p = pd.getListaProveedor(profesion);
+        return p;
+    }
 
 }

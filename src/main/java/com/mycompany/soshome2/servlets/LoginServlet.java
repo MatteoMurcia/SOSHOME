@@ -86,10 +86,10 @@ public class LoginServlet extends HttpServlet {
                         .compact();
                 Cookie token = new Cookie("token",jwt);
                 response.addCookie(token);
-                response.getWriter().write(Utils.toJson("proveedor"));
+                response.getWriter().write("proveedor");
             }
             else if(cli.getClave()!=null && cli.getClave().equals(l.getClave())){
-                response.getWriter().write(Utils.toJson("cliente"));
+                response.getWriter().write("cliente");
                 String KEY = "token";
                 long tiempo = System.currentTimeMillis();
                 String jwt =Jwts.builder()
@@ -105,7 +105,7 @@ public class LoginServlet extends HttpServlet {
                 response.addCookie(token);
             }
             else{
-                response.getWriter().write(Utils.toJson("error"));
+                response.getWriter().write("error");
             }
         
     }

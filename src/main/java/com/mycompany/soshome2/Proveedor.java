@@ -66,6 +66,8 @@ public class Proveedor implements Serializable {
         this.cedulap = cedulap;
     }
 
+    
+
     public String getCedulap() {
         return cedulap;
     }

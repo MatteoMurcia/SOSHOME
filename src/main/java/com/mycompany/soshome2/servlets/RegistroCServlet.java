@@ -46,7 +46,21 @@ public class RegistroCServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Cliente cli = (Cliente) Utils.fromJson(Utils.readParams(request), Cliente.class );
+
         
+        Cliente prueba = ClienteManager.pedirCliente(cli.getCedulac());
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        if(prueba.getClave()==null){
+        
+        String p = ClienteManager.insertCliente(cli);
+        
+        response.getWriter().write(Utils.toJson(p));
+        }
+        else{
+             response.getWriter().write(Utils.toJson("error"));
+        }
     }
 
     /**

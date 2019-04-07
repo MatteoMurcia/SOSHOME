@@ -7,6 +7,7 @@ package com.mycompany.soshome2.persistance;
 
 
 import com.mycompany.soshome2.Proveedor;
+import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -56,6 +57,24 @@ public class ProveedorDAO {
             System.out.println(e.getMessage());
             e.printStackTrace();
             return new Proveedor();
+        }finally{
+            if(em!=null && em.isOpen()){
+                em.close();
+            }
+        }
+    }
+     public List<Proveedor> getListaProveedor(String profesion){
+        try{
+            em =Factory.get().createEntityManager();
+            em.getTransaction().begin();
+            TypedQuery<Proveedor> query = (TypedQuery<Proveedor>) em.createQuery("SELECT p FROM Proveedor p WHERE p.profesion = :profesion",Proveedor.class);
+            query.setParameter("profesion", profesion);
+            em.getTransaction().commit();
+            return (List<Proveedor>) query.getResultList();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return (List<Proveedor>) new Proveedor();
         }finally{
             if(em!=null && em.isOpen()){
                 em.close();
